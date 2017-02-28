@@ -5,13 +5,12 @@ NAME = "pxdo"
 VERSION = "0.10"
 
 
-import Xlib
+import sys, re
 import Xlib.display
 import Xlib.X as X
 import Xlib.Xatom as Xatom
 import Xlib.protocol as protocol
-from Xlib.ext import randr
-import sys, getopt, re
+import Xlib.ext.randr as randr
 
 display = None
 MOVE_REGEX = '--move-(0x[0-9a-fA-F]+)-(\\d+)x(\\d+)\\+(\\d+)\\+(\\d+)'
