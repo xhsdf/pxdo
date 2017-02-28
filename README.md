@@ -1,4 +1,4 @@
-Python script for querying X-server information and moving X-windows
+Python script for querying X-server information and manipulating X-windows
 
 #Actions
 
