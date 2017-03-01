@@ -2,7 +2,7 @@
 
 
 NAME = "pxdo"
-VERSION = "0.11"
+VERSION = "0.12"
 
 
 from sys import exc_info, argv
@@ -46,7 +46,8 @@ def main(argv):
 def print_window_info():
 	window_ids = Window.get_window_ids()
 	for w in Window.get_windows():
-		print("WINDOW: " + w.get_info_string())
+		if w.type == None or display.intern_atom("_NET_WM_WINDOW_TYPE_NORMAL") in w.type:
+			print("WINDOW: " + w.get_info_string())
 
 
 def print_monitor_info():
@@ -93,6 +94,7 @@ class Window:
 		self.win = win
 		self.id = win_id
 		self.active = False
+		self.type = None
 		self.name = self.wm_class = "Unknown"
 		self.workspace = -1
 		self.hidden = False
@@ -107,6 +109,7 @@ class Window:
 			self.name = self.get_property('WM_NAME').decode("ascii", errors='ignore').replace("\t", "  ")
 			self.workspace = int(self.get_property('_NET_WM_DESKTOP')[0])
 			self.allowed_actions = self.get_property('_NET_WM_ALLOWED_ACTIONS')
+			self.type = self.get_property('_NET_WM_WINDOW_TYPE')
 			self.state = self.get_property('_NET_WM_STATE')
 			if display.intern_atom("_NET_WM_STATE_HIDDEN") in self.state:
 				self.hidden = True
