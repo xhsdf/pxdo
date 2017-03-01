@@ -2,21 +2,21 @@ Python script for querying X-server information and manipulating X-windows
 
 #Actions
 
-##--get-window-info
+##--print-window-info
 
 print information on X windows  
 format: `<id> <geometry> <frame_extents> <window_workspace>:<current_workspace> <tags> <class> <title>`  
 separated by tabs
 
-##--get-active-window-info
+##--print-active-window-info
 
 print information on the active X window
 
-##--get-active-window-id
+##--print-active-window-id
 
 print the id of the active X window
 
-##--get-monitor-info
+##--print-monitor-info
 
 print information on active monitors  
 format: `<name> <id> <geometry>`  

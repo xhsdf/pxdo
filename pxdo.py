@@ -2,7 +2,7 @@
 
 
 NAME = "pxdo"
-VERSION = "0.10"
+VERSION = "0.11"
 
 
 from sys import exc_info, argv
@@ -22,13 +22,13 @@ def main(argv):
 		try:
 			if arg == '--version':
 				print("%s v%s" % (NAME, VERSION))
-			elif arg == '--get-active-window-id':
+			elif arg == '--print-active-window-id':
 				print("0x%x" % Window.get_active_window_id())
-			elif arg == '--get-active-window-info':
+			elif arg == '--print-active-window-info':
 				print_active_window_info()
-			elif arg == '--get-window-info':
+			elif arg == '--print-window-info':
 				print_window_info()
-			elif arg == '--get-monitor-info':
+			elif arg == '--print-monitor-info':
 				print_monitor_info()
 			elif match(MOVE_REGEX, arg):
 				p = compile(MOVE_REGEX)
@@ -57,7 +57,7 @@ def print_monitor_info():
 def print_active_window_info():
 	w = Window.from_id(int(Window.get_active_window_id()))
 	w.active = True
-	print(w.get_info_string())
+	print("WINDOW: " + w.get_info_string())
 
 class Monitor:
 	def __init__(self, mon_id, x, y, width, height):
