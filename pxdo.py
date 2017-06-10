@@ -2,7 +2,7 @@
 
 
 NAME = "pxdo"
-VERSION = "0.12"
+VERSION = "0.12a"
 
 
 from sys import exc_info, argv
@@ -115,7 +115,8 @@ class Window:
 				self.hidden = True
 			if display.intern_atom("_NET_WM_STATE_FULLSCREEN") in self.state:
 				self.fullscreen = True
-			self.wm_class = win.get_wm_class()[1]
+			if win.get_wm_class() != None:
+				self.wm_class = win.get_wm_class()[1]
 			geometry = win.query_tree().parent.get_geometry()
 			self.x = geometry.x
 			self.y = geometry.y
