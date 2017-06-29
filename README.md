@@ -29,4 +29,4 @@ show version
 
 # Dependencies
 
--python-xlib
+-python-xlib (Can be out of date in some distro repos - see [#2](https://github.com/xhsdf/pxdo/issues/2))
