@@ -2,12 +2,13 @@
 
 
 NAME = "pxdo"
-VERSION = "0.12a"
+VERSION = "0.12b"
 
 
 from sys import exc_info, argv
 from re import match, compile
 from Xlib.display import Display
+from Xlib.error import BadWindow
 from Xlib.ext.randr import get_screen_resources, get_output_info
 from Xlib.protocol.event import ClientMessage
 from Xlib.X import AnyPropertyType, SubstructureRedirectMask, SubstructureNotifyMask
@@ -129,11 +130,14 @@ class Window:
 		windows = []
 		active_window_id = Window.get_active_window_id()
 		for id in Window.get_window_ids():
-			w = Window.from_id(int(id))
-			if id == active_window_id:
-				w.active = True
-			if display.intern_atom("_NET_WM_ACTION_MOVE") in w.allowed_actions or display.intern_atom("_NET_WM_ACTION_RESIZE") in w.allowed_actions:
-				windows.append(w)
+			try:
+				w = Window.from_id(int(id))
+				if id == active_window_id:
+					w.active = True
+				if display.intern_atom("_NET_WM_ACTION_MOVE") in w.allowed_actions or display.intern_atom("_NET_WM_ACTION_RESIZE") in w.allowed_actions:
+					windows.append(w)
+			except BadWindow:
+				pass
 		return windows
 
 
