@@ -2,7 +2,7 @@ Python script for querying X-server information and manipulating X-windows
 
 # Actions
 
-## --move-<id>-<width>x<height>+<x>+<y>
+## --move-\<id>-\<width>x\<height>+\<x>+\<y>
 
 move an X window to the specified position
 
