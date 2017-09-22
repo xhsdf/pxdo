@@ -2,6 +2,10 @@ Python script for querying X-server information and manipulating X-windows
 
 # Actions
 
+## --move-<id>-<width>x<height>+<x>+<y>
+
+move an X window to the specified position
+
 ## --print-window-info
 
 print information on X windows  
@@ -29,4 +33,4 @@ show version
 
 # Dependencies
 
--python-xlib (Can be out of date in some distro repos - see [#2](https://github.com/xhsdf/pxdo/issues/2))
+-python-xlib (can be out of date in some distro repos - see [#2](https://github.com/xhsdf/pxdo/issues/2))
