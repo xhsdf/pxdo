@@ -2,7 +2,7 @@
 
 
 NAME = "pxdo"
-VERSION = "0.12b"
+VERSION = "0.12c"
 
 
 from sys import exc_info, argv
@@ -107,7 +107,11 @@ class Window:
 		if extents != None:
 			self.extents_left, self.extents_right, self.extents_top, self.extents_bottom = extents
 		if full:
-			self.name = self.get_property('WM_NAME').decode("ascii", errors='ignore').replace("\t", "  ")
+			self.name = self.get_property('WM_NAME')
+			if self.name is None:
+				self.name = 'unknown'
+			else:
+				self.name = self.name.decode("ascii", errors='ignore').replace("\t", "  ")
 			self.workspace = int(self.get_property('_NET_WM_DESKTOP')[0])
 			self.allowed_actions = self.get_property('_NET_WM_ALLOWED_ACTIONS')
 			self.type = self.get_property('_NET_WM_WINDOW_TYPE')
