@@ -2,7 +2,7 @@
 
 
 NAME = "pxdo"
-VERSION = "0.12d"
+VERSION = "0.12e"
 
 
 from sys import exc_info, argv
@@ -141,7 +141,10 @@ class Window:
 				w = Window.from_id(int(id))
 				if id == active_window_id:
 					w.active = True
-				if display.intern_atom("_NET_WM_ACTION_MOVE") in w.allowed_actions or display.intern_atom("_NET_WM_ACTION_RESIZE") in w.allowed_actions:
+				if w.allowed_actions == None:
+					if w.type != None and display.intern_atom("_NET_WM_WINDOW_TYPE_NORMAL") in w.type:
+						windows.append(w)
+				elif display.intern_atom("_NET_WM_ACTION_MOVE") in w.allowed_actions or display.intern_atom("_NET_WM_ACTION_RESIZE") in w.allowed_actions:
 					windows.append(w)
 			except BadWindow:
 				pass
