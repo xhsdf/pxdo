@@ -2,7 +2,7 @@
 
 
 NAME = "pxdo"
-VERSION = "0.12c"
+VERSION = "0.12d"
 
 
 from sys import exc_info, argv
@@ -37,7 +37,10 @@ def main(argv):
 				w = Window.from_id(int(wid, 16), False)
 				w.move(int(x), int(y), int(width), int(height))
 		except:
-			print("Unexpected error:", exc_info()[0])
+			if '--debug' in argv:
+				raise
+			else:
+				print("Unexpected error:", exc_info()[0])
 
 	display.sync()
 	display.flush()
