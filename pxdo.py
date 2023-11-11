@@ -2,7 +2,7 @@
 
 
 NAME = "pxdo"
-VERSION = "0.12e"
+VERSION = "0.13"
 
 
 from sys import exc_info, argv
@@ -118,11 +118,14 @@ class Window:
 			self.workspace = int(self.get_property('_NET_WM_DESKTOP')[0])
 			self.allowed_actions = self.get_property('_NET_WM_ALLOWED_ACTIONS')
 			self.type = self.get_property('_NET_WM_WINDOW_TYPE')
-			self.state = self.get_property('_NET_WM_STATE')
-			if display.intern_atom("_NET_WM_STATE_HIDDEN") in self.state:
-				self.hidden = True
-			if display.intern_atom("_NET_WM_STATE_FULLSCREEN") in self.state:
-				self.fullscreen = True
+			try:
+				self.state = self.get_property('_NET_WM_STATE')
+				if display.intern_atom("_NET_WM_STATE_HIDDEN") in self.state:
+					self.hidden = True
+				if display.intern_atom("_NET_WM_STATE_FULLSCREEN") in self.state:
+					self.fullscreen = True
+			except:
+				pass
 			if win.get_wm_class() != None:
 				self.wm_class = win.get_wm_class()[1]
 			geometry = win.query_tree().parent.get_geometry()
